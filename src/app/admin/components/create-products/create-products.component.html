@@ -1,0 +1,75 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Productos</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="id" formControlName="id" matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input
+              placeholder="titulo"
+              formControlName="title"
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input
+              placeholder="precio"
+              formControlName="price"
+              matInput
+              type="number"
+            />
+          </mat-form-field>
+          <mat-error
+            *ngIf="priceField.hasError('price_invalid') && priceField.dirty"
+            >el campo es requerido</mat-error
+          >
+          <mat-error
+            *ngIf="
+              priceField.hasError('price_not_required') && priceField.dirty
+            "
+            >Colocar algun valor</mat-error
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <textarea
+              formControlName="description"
+              placeholder="Descripcion"
+              matInput
+              type="text"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs">
+          <img *ngIf="image$ | async as image" [src]="image" />
+          <input type="file" (change)="uploadFile($event)" />
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">Guardar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
